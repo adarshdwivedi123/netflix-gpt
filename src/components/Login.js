@@ -36,10 +36,11 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName:email.current.value , photoURL: "https://avatars.githubusercontent.com/u/51378545?v=4"
+                        displayName:email.current.value ,
+                         photoURL: "https://avatars.githubusercontent.com/u/51378545?v=4"
                       }).then(() => {
                         const {uid,email,displayName,photoURL} = auth.currentUser;
-                        dispatch(addUser({id:uid,email:email,displayName:displayName,photoURL}));
+                        dispatch(addUser({id:uid,email:email,displayName:displayName,photoURL:photoURL}));
 
                         navigate("/browse")
                         
@@ -69,7 +70,7 @@ const Login = () => {
                 
                 const user = userCredential.user;
                 navigate("/browse");
-                console.log(user);
+                // console.log(user);
                 
             })
             .catch((error) => {
