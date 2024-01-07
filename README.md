@@ -1,3 +1,15 @@
+#Netflix GPT
+-create React App
+-Configured TailWindCss
+-Header
+-ROuting of App
+-Login Form
+-Sign up Form
+-Form Validation
+-useRef Hook
+
+
+
 #Features
  -Login/SignUp
   -SignIn/SignUp
