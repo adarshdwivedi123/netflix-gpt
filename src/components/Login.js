@@ -3,17 +3,18 @@ import Header from './Header';
 import { checkValidData } from '../utils/validate'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BG_IMG} from '../utils/constants';
+import { USER_AVATAR } from '../utils/constants';
 
 
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate =useNavigate();
+    
     const dispatch =useDispatch()
 
     const email = useRef(null);
@@ -37,18 +38,16 @@ const Login = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName:email.current.value ,
-                         photoURL: "https://avatars.githubusercontent.com/u/51378545?v=4"
+                         photoURL: USER_AVATAR
                       }).then(() => {
                         const {uid,email,displayName,photoURL} = auth.currentUser;
                         dispatch(addUser({id:uid,email:email,displayName:displayName,photoURL:photoURL}));
-
-                        navigate("/browse")
                         
                          }).catch((error) => {
                         setErrorMessage(error.message);
                      //check here   
                       });
-                    navigate("/browse");
+                    
                     
                     
 
@@ -69,8 +68,6 @@ const Login = () => {
             .then((userCredential) => {
                 
                 const user = userCredential.user;
-                navigate("/browse");
-                // console.log(user);
                 
             })
             .catch((error) => {
@@ -88,7 +85,7 @@ const Login = () => {
             <Header />
             <div className='absolute'>
                 <img
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/c38a2d52-138e-48a3-ab68-36787ece46b3/eeb03fc9-99c6-438e-824d-32917ce55783/IN-en-20240101-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
+                    src={BG_IMG}
                     alt="logo" />
             </div>
             {/* Login Form */}
